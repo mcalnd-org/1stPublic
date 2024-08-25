@@ -20,3 +20,11 @@ jobs:
         run: echo "ORG_MINOGUE=${{ secrets.ORG_MINOGUE }}"
       - name: Echo Org Variable
         run: echo "VAR_MINOGUE=${{ vars.VAR_MINOGUE }}"
+      - name: Debug Echo Org Variable
+        env:
+          VAR_MINOGUE: ${{ vars.VAR_MINOGUE }}
+        run: |
+          echo "VAR_MINOGUE=${{ env.VAR_MINOGUE }}"
+          echo "Length of VAR_MINOGUE: $(echo -n "${{ env.VAR_MINOGUE }}" | wc -m)"
+          echo "Variable content debug:"
+          echo "${{ env.VAR_MINOGUE }}"        
