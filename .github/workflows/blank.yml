@@ -19,5 +19,5 @@ jobs:
       - name: Echo Org Secret
         run: echo "ORG_MINOGUE=${{ secrets.ORG_MINOGUE }}"
       - name: Echo Org Variable
-        run: echo "VAR_MINOGUE=${{ secrets.VAR_MINOGUE }}"
+        run: echo "VAR_MINOGUE=${{ vars.VAR_MINOGUE }}"
         
