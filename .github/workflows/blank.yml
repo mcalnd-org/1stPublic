@@ -11,15 +11,13 @@ on:
         type: choice
         options:
           - ALL
-          - DEV_BUILD_STAGE
-          - DEV_DEPLOY_STAGE
-          - PRD_BUILD_STAGE
-          - PRD_DEPLOY_STAGE
+          - DEV_STAGES
+          - PRD_STAGES
 
 jobs:
   DEV_BUILD_STAGE:
     runs-on: ubuntu-latest
-    if: ${{ github.event_name == 'push' || github.event.inputs.stage == 'ALL' || github.event.inputs.stage == 'DEV_BUILD_STAGE' }}
+    if: ${{ github.event_name == 'push' || github.event.inputs.stage == 'ALL' || github.event.inputs.stage == 'DEV_STAGES' }}
     steps:
       - run: echo "DEV BUILD"
       - run: sleep 10
@@ -27,15 +25,15 @@ jobs:
   DEV_DEPLOY_STAGE:
     runs-on: ubuntu-latest
     needs: DEV_BUILD_STAGE
-    if: ${{ github.event_name == 'push' || github.event.inputs.stage == 'ALL' || github.event.inputs.stage == 'DEV_DEPLOY_STAGE' }}
+    if: ${{ github.event_name == 'push' || github.event.inputs.stage == 'ALL' || github.event.inputs.stage == 'DEV_STAGES' }}
     steps:
       - run: echo "DEV DEPLOY"
-      - run: make me fail
+      - run: sleep 10
 
   PRD_BUILD_STAGE:
     runs-on: ubuntu-latest
     environment: prd
-    if: ${{ github.event_name == 'push' || github.event.inputs.stage == 'ALL' || github.event.inputs.stage == 'PRD_BUILD_STAGE' }}
+    if: ${{ github.event_name == 'push' || github.event.inputs.stage == 'ALL' || github.event.inputs.stage == 'PRD_STAGES' }}
     steps:
       - run: echo "PRD BUILD"
       - run: sleep 10
@@ -44,6 +42,6 @@ jobs:
     runs-on: ubuntu-latest
     environment: prd
     needs: PRD_BUILD_STAGE
-    if: ${{ github.event_name == 'push' || github.event.inputs.stage == 'ALL' || github.event.inputs.stage == 'PRD_DEPLOY_STAGE' }}
+    if: ${{ github.event_name == 'push' || github.event.inputs.stage == 'ALL' || github.event.inputs.stage == 'PRD_STAGES' }}
     steps:
       - run: echo "PRD DEPLOY"
