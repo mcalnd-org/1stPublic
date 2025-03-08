@@ -15,6 +15,10 @@ on:
           - DEV_DEPLOY_STAGE
           - PRD_BUILD_STAGE
           - PRD_DEPLOY_STAGE
+  workflow_run:
+    workflows: ["STAGES"]
+    types:
+      - completed
 
 jobs:
   DEV_BUILD_STAGE:
@@ -30,7 +34,6 @@ jobs:
     if: ${{ github.event_name == 'push' || github.event.inputs.stage == 'ALL' || github.event.inputs.stage == 'DEV_DEPLOY_STAGE' }}
     steps:
       - run: echo "DEV DEPLOY"
-      - run: sleepy 1
 
   PRD_BUILD_STAGE:
     runs-on: ubuntu-latest
