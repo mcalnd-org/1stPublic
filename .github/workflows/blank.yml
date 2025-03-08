@@ -16,7 +16,7 @@ on:
 
 jobs:
   DEV_BUILD_STAGE:
-    name: ":rocket:"
+    name: "🚀"
     runs-on: ubuntu-latest
     if: ${{ github.event_name == 'push' || github.event.inputs.stage == 'ALL' || github.event.inputs.stage == 'DEV_STAGES' }}
     steps:
