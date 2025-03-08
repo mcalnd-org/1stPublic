@@ -1,9 +1,14 @@
-name: GitHub Actions Demo
+name: STAGES
 run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 on: [push]
 jobs:
-  Explore-GitHub-Actions-Part2-to-Part3:
+  DEV_STAGE:
     runs-on: ubuntu-latest
     steps:
       - run: echo "DEV STAGR"
+  PRD_STAGE:
+    runs-on: ubuntu-latest
+    environment: prd
+    steps:
+      - run: echo "PRD STAGE"
   
