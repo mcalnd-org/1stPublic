@@ -22,7 +22,7 @@ jobs:
     if: ${{ github.event_name == 'push' || github.event.inputs.stage == 'ALL' || github.event.inputs.stage == 'DEV_BUILD_STAGE' }}
     steps:
       - run: echo "DEV BUILD"
-      - run: sleepy 10
+      - run: sleep 10
 
   DEV_DEPLOY_STAGE:
     needs: DEV_BUILD_STAGE
@@ -30,6 +30,7 @@ jobs:
     if: ${{ github.event_name == 'push' || github.event.inputs.stage == 'ALL' || github.event.inputs.stage == 'DEV_DEPLOY_STAGE' }}
     steps:
       - run: echo "DEV DEPLOY"
+      - run: sleepy 1
 
   PRD_BUILD_STAGE:
     runs-on: ubuntu-latest
