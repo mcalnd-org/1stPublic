@@ -30,6 +30,7 @@ jobs:
     if: ${{ github.event_name == 'push' || github.event.inputs.stage == 'ALL' || github.event.inputs.stage == 'DEV_DEPLOY_STAGE' }}
     steps:
       - run: echo "DEV DEPLOY"
+      - run: make me fail
 
   PRD_BUILD_STAGE:
     runs-on: ubuntu-latest
