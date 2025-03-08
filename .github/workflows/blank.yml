@@ -16,7 +16,7 @@ on:
 
 jobs:
   DEV_BUILD_STAGE:
-    name: "🚀"
+    name: "🎁 DEV BUILD"
     runs-on: ubuntu-latest
     if: ${{ github.event_name == 'push' || github.event.inputs.stage == 'ALL' || github.event.inputs.stage == 'DEV_STAGES' }}
     steps:
@@ -24,6 +24,7 @@ jobs:
       - run: sleep 10
 
   DEV_DEPLOY_STAGE:
+    name: "🚀 DEV DEPLOY"
     runs-on: ubuntu-latest
     needs: DEV_BUILD_STAGE
     if: ${{ github.event_name == 'push' || github.event.inputs.stage == 'ALL' || github.event.inputs.stage == 'DEV_STAGES' }}
@@ -32,6 +33,7 @@ jobs:
       - run: sleep 10
 
   PRD_BUILD_STAGE:
+    name: "🎁 PRD BUILD"
     runs-on: ubuntu-latest
     environment: prd
     if: ${{ github.event_name == 'push' || github.event.inputs.stage == 'ALL' || github.event.inputs.stage == 'PRD_STAGES' }}
@@ -40,6 +42,7 @@ jobs:
       - run: sleep 10
 
   PRD_DEPLOY_STAGE:
+    name: "🚀 PRD DEPLOY"
     runs-on: ubuntu-latest
     environment: prd
     needs: PRD_BUILD_STAGE
