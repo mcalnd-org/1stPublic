@@ -22,6 +22,7 @@ jobs:
     if: ${{ github.event_name == 'push' || github.event.inputs.stage == 'ALL' || github.event.inputs.stage == 'DEV_BUILD_STAGE' }}
     steps:
       - run: echo "DEV BUILD"
+      - run: sleep 30
 
   DEV_DEPLOY_STAGE:
     needs: DEV_BUILD_STAGE
@@ -36,6 +37,7 @@ jobs:
     if: ${{ github.event_name == 'push' || github.event.inputs.stage == 'ALL' || github.event.inputs.stage == 'PRD_BUILD_STAGE' }}
     steps:
       - run: echo "PRD BUILD"
+      - run: sleep 30
 
   PRD_DEPLOY_STAGE:
     needs: PRD_BUILD_STAGE
