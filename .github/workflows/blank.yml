@@ -1,13 +1,24 @@
 name: STAGES
 on: [push]
 jobs:
-  DEV_STAGE:
+  DEV_BUILD_STAGE:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "DEV STAGR"
-  PRD_STAGE:
+      - run: echo "DEV BUILD"
+  DEV_DEPLOY_STAGE:
+    needs: DEV_BUILD_STAGE
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "DEV DEPLOY"
+  PRD_BUILD_STAGE:
     runs-on: ubuntu-latest
     environment: prd
     steps:
-      - run: echo "PRD STAGE"
+      - run: echo "PRD BUILD"
+  PRD_DEPLOY_STAGE:
+    needs: PRD_BUILD_STAGE
+    environment: prd
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "PRD DEPLOY"
   
