@@ -1,24 +1,46 @@
 name: STAGES
-on: [push]
+
+on:
+  push:
+  workflow_dispatch:
+    inputs:
+      stage:
+        description: 'Select a stage to run'
+        required: true
+        default: 'ALL'
+        type: choice
+        options:
+          - ALL
+          - DEV_BUILD_STAGE
+          - DEV_DEPLOY_STAGE
+          - PRD_BUILD_STAGE
+          - PRD_DEPLOY_STAGE
+
 jobs:
   DEV_BUILD_STAGE:
     runs-on: ubuntu-latest
+    if: ${{ github.event.inputs.stage == 'ALL' || github.event.inputs.stage == 'DEV_BUILD_STAGE' }}
     steps:
       - run: echo "DEV BUILD"
+
   DEV_DEPLOY_STAGE:
     needs: DEV_BUILD_STAGE
     runs-on: ubuntu-latest
+    if: ${{ github.event.inputs.stage == 'ALL' || github.event.inputs.stage == 'DEV_DEPLOY_STAGE' }}
     steps:
       - run: echo "DEV DEPLOY"
+
   PRD_BUILD_STAGE:
     runs-on: ubuntu-latest
     environment: prd
+    if: ${{ github.event.inputs.stage == 'ALL' || github.event.inputs.stage == 'PRD_BUILD_STAGE' }}
     steps:
       - run: echo "PRD BUILD"
+
   PRD_DEPLOY_STAGE:
     needs: PRD_BUILD_STAGE
     environment: prd
     runs-on: ubuntu-latest
+    if: ${{ github.event.inputs.stage == 'ALL' || github.event.inputs.stage == 'PRD_DEPLOY_STAGE' }}
     steps:
       - run: echo "PRD DEPLOY"
-  
