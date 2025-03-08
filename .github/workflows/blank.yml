@@ -1,5 +1,4 @@
 name: STAGES
-run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 on: [push]
 jobs:
   DEV_STAGE:
